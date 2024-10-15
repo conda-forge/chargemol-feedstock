@@ -11,12 +11,13 @@ source:
   sha256: 3aec3805536d8b1f4b5b2bbbab3a20a1eff3cfa830aca24ad3d39d03eae0a95b
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - {{ compiler('fortran') }}  # [osx or linux]
     - {{ compiler('m2w64_fortran') }}  # [windows]
+    - {{ stdlib("c") }}    # [windows]
   host:
     - llvm-openmp  # [osx or windows]
     - libgomp  # [linux]
