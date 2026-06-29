@@ -4,7 +4,7 @@
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://sourceforge.net/projects/ddec/files/{{ name }}_{{ date_string }}.zip
@@ -12,10 +12,12 @@ source:
 
 build:
   number: 1
+  skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('fortran') }}  # [osx or linux]
+    - {{ stdlib("c") }}  # [osx or linux]
     - {{ compiler('m2w64_fortran') }}  # [windows]
   host:
     - llvm-openmp  # [osx or windows]
