@@ -7,8 +7,13 @@ cd sourcecode_linux/
 
 # Adapted from compile_parallel.txt
 # (the file hardcodes gfortran, command line options, and windows line endings)
+#
+# $LDFLAGS is required so the linker searches $PREFIX/lib (-L$PREFIX/lib) for
+# libgfortran/libomp/libquadmath. Without it a native build still links (those
+# libs are on the compiler's default path), but an osx-arm64 *cross*-build on an
+# x86_64 runner fails with "ld: library not found for -lgfortran".
 
-$FC $FFLAGS -fopenmp -o Chargemol_09_26_2017_linux_parallel \
+$FC $FFLAGS $LDFLAGS -fopenmp -o Chargemol_09_26_2017_linux_parallel \
   module_precision.f08 \
   module_global_parameters.f08 \
   module_common_variable_declarations.f08 \
